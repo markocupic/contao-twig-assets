@@ -5,7 +5,7 @@
         "contao",
         "TWIG",
         "assets",
-        "$GLOBALS",
+        "GLOBALS",
         "TL_JAVASCRIPT",
         "TL_CSS",
         "TL_HEAD",
