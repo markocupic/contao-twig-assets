@@ -1,0 +1,56 @@
+{
+    "name": "markocupic/contao-twig-assets",
+    "description": "Load link- or script-assets to the document from inside your TWIG template.",
+    "keywords": [
+        "contao",
+        "TWIG",
+        "assets",
+        "$GLOBALS['TL_JAVASCRIPT']",
+        "$GLOBALS['TL_CSS']",
+        "$GLOBALS['TL_HEAD']",
+        "$GLOBALS['TL_MOOTOOLS']",
+        "$GLOBALS['TL_BODY']"
+    ],
+    "type": "contao-bundle",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Marko Cupic",
+            "email": "m.cupic@gmx.ch",
+            "homepage": "https://github.com/markocupic",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/markocupic/contao-twig-assets/issues",
+        "source": "https://github.com/markocupic/contao-twig-assets"
+    },
+    "require": {
+        "php": "^8.1",
+        "contao/core-bundle": "^4.13 || ^5.0"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.3.1",
+        "contao/test-case": "^4.5",
+        "phpunit/phpunit": "^9.3",
+        "symfony/http-client": "5.4.*",
+        "symfony/phpunit-bridge": "^5.4",
+        "contao/easy-coding-standard": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Markocupic\\ContaoTwigAssets\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "contao-components/installer": true,
+            "contao/manager-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "contao-community-alliance/composer-plugin": true
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "Markocupic\\ContaoTwigAssets\\ContaoManager\\Plugin"
+    }
+}
