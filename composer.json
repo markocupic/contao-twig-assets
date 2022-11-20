@@ -5,11 +5,11 @@
         "contao",
         "TWIG",
         "assets",
-        "$GLOBALS['TL_JAVASCRIPT']",
-        "$GLOBALS['TL_CSS']",
-        "$GLOBALS['TL_HEAD']",
-        "$GLOBALS['TL_MOOTOOLS']",
-        "$GLOBALS['TL_BODY']"
+        "GLOBALS['TL_JAVASCRIPT']",
+        "GLOBALS['TL_CSS']",
+        "GLOBALS['TL_HEAD']",
+        "GLOBALS['TL_MOOTOOLS']",
+        "GLOBALS['TL_BODY']"
     ],
     "type": "contao-bundle",
     "license": "GPL-3.0-or-later",
