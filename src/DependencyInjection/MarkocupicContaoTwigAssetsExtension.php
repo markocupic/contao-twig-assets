@@ -43,12 +43,8 @@ class MarkocupicContaoTwigAssetsExtension extends Extension
             new FileLocator(__DIR__.'/../../config')
         );
 
-        $loader->load('parameters.yaml');
         $loader->load('services.yaml');
-        $loader->load('listener.yaml');
 
         $rootKey = $this->getAlias();
-
-        $container->setParameter($rootKey.'.foo.bar', $config['foo']['bar']);
     }
 }
