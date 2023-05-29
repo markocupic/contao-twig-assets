@@ -20,20 +20,45 @@ use Twig\TwigFunction;
 
 class TwigAssetManager extends AbstractExtension
 {
-    public function __construct()
-    {
+    public function __construct(
+        private readonly string $projectDir,
+    ) {
         $this->createGlobalsIfNotSet();
     }
 
     public function getFunctions(): array
     {
         return [
+            new TwigFunction('getFileMakeTime', [$this, 'getFileMakeTime']),
             new TwigFunction('addCssResource', [$this, 'addCssResource']),
             new TwigFunction('addJavascriptResource', [$this, 'addJavascriptResource']),
             new TwigFunction('addMootoolsResource', [$this, 'addMootoolsResource']),
             new TwigFunction('addHtmlToBody', [$this, 'addHtmlToBody']),
             new TwigFunction('addHtmlToHead', [$this, 'addHtmlToHead']),
         ];
+    }
+
+    /**
+     * Get the file make time (filemtime()) from inside your Twig template.
+     *
+     * Inside your Twig template:
+     * {% set fileMakeTime = getFileMakeTime('vendor/foo-bar-bundle/public/css/my.css') %}.
+     * {# append the version parameter to ensure that clients receive the latest version of the asset, when it changes. #}
+     * {% do addCssResource('bundles/foobar/css/my.css|' ~ fileMakeTime) %}
+     *
+     * @see: https://docs.contao.org/dev/framework/asset-management.
+     */
+    public function getFileMakeTime(string $res): int
+    {
+        if (is_file($this->projectDir.'/'.$res)) {
+            return filemtime($this->projectDir.'/'.$res);
+        }
+
+        if (is_file($res)) {
+            return filemtime($res);
+        }
+
+        throw new \Exception(sprintf('File "%s" not found.', $res));
     }
 
     /**

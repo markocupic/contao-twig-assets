@@ -52,3 +52,14 @@ The first parameter '$resource_path' is mandatory, while the second parameter '$
 {% do addMootoolsResource('<script src="bundles/myextension/moo_scripts.js"></script>') %}
 {# Same as $GLOBALS['TL_MOOTOOLS'][] = '<script src="bundles/contaofoobarplugin/moo_script.js"></script>'; #}
 ```
+
+## File make time
+Get the file make time of a script or css asset and append the version parameter to ensure
+that clients always receive the latest version of the asset, when it changes.
+```
+{# Inside your twig template: #}
+
+{% set fileMakeTime = getFileMakeTime('vendor/foo-bar-bundle/public/css/my.css') %}.
+{% do addCssResource('bundles/foobar/css/my.css|' ~ fileMakeTime) %}
+{# --> bundles/foobar/css/my.css?v=93449db6 #}
+```
