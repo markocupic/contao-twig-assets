@@ -54,12 +54,14 @@ The first parameter '$resource_path' is mandatory, while the second parameter '$
 ```
 
 ## File make time
-Get the file make time of a script or css asset and append the version parameter to ensure
+Use the third paramter (boolean true) to add the file make time of a script or css asset to ensure
 that clients always receive the latest version of the asset, when it changes.
 ```
 {# Inside your twig template: #}
 
-{% set fileMakeTime = getFileMakeTime('vendor/foo-bar-bundle/public/css/my.css') %}.
-{% do addCssResource('bundles/foobar/css/my.css|' ~ fileMakeTime) %}
-{# --> bundles/foobar/css/my.css?v=93449db6 #}
+{% do addCssResource('bundles/foobar/css/my.css',null,true) %}
+{# --> bundles/foobar/css/my.css?_ver=1709332057 #}
+
+{% do addJavascriptResource('bundles/contaofoobarplugin/js/my.js',null,true) %}
+{# --> bundles/contaofoobarplugin/js/my.js?_ver=1709332057 #}
 ```

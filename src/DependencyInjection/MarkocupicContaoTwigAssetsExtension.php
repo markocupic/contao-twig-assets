@@ -34,9 +34,6 @@ class MarkocupicContaoTwigAssetsExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $configuration = new Configuration();
-
-        $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new YamlFileLoader(
             $container,
@@ -44,7 +41,5 @@ class MarkocupicContaoTwigAssetsExtension extends Extension
         );
 
         $loader->load('services.yaml');
-
-        $rootKey = $this->getAlias();
     }
 }

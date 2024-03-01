@@ -69,9 +69,9 @@ class TwigAssetManager extends AbstractExtension
      *
      * @see: https://docs.contao.org/dev/framework/asset-management.
      */
-    public function addCssResource(string $res, int|string|null $pos = null): void
+    public function addCssResource(string $res, int|string|null $pos = null, bool $addFileMakeTime = false): void
     {
-        $this->addResource(DocumentLocation::TL_CSS->value, $res, $pos);
+        $this->addResource(DocumentLocation::TL_CSS->value, $res, $pos, $addFileMakeTime);
     }
 
     /**
@@ -82,9 +82,9 @@ class TwigAssetManager extends AbstractExtension
      *
      * @see: https://docs.contao.org/dev/framework/asset-management.
      */
-    public function addJavascriptResource(string $res, int|string|null $pos = null): void
+    public function addJavascriptResource(string $res, int|string|null $pos = null, bool $addFileMakeTime = false): void
     {
-        $this->addResource(DocumentLocation::TL_JAVASCRIPT->value, $res, $pos);
+        $this->addResource(DocumentLocation::TL_JAVASCRIPT->value, $res, $pos, $addFileMakeTime);
     }
 
     /**
@@ -126,10 +126,14 @@ class TwigAssetManager extends AbstractExtension
         $this->addResource(DocumentLocation::TL_HEAD->value, $res, $pos);
     }
 
-    public function addResource(string $location, string $res, int|string|null $pos = null): void
+    public function addResource(string $location, string $res, int|string|null $pos = null, bool $addFileMakeTime = false): void
     {
         if (!\in_array($location, $this->getGlobalsKeys(), true)) {
             throw new \Exception("'%s' is not a valid asset location.");
+        }
+
+        if ($addFileMakeTime) {
+            $res = $this->appendFileMakeTime($res);
         }
 
         if ($pos) {
@@ -157,5 +161,14 @@ class TwigAssetManager extends AbstractExtension
             DocumentLocation::TL_BODY->value,
             DocumentLocation::TL_MOOTOOLS->value,
         ];
+    }
+
+    private function appendFileMakeTime($res)
+    {
+        $intFileMakeTime = $this->getFileMakeTime($res);
+        $queryString = http_build_query(['_ver'=>$intFileMakeTime]);
+
+        return append_query_string($res, $queryString);
+
     }
 }
