@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Markocupic\ContaoTwigAssets;
 
 use Markocupic\ContaoTwigAssets\DependencyInjection\MarkocupicContaoTwigAssetsExtension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class MarkocupicContaoTwigAssets extends Bundle
@@ -28,13 +27,5 @@ class MarkocupicContaoTwigAssets extends Bundle
     public function getContainerExtension(): MarkocupicContaoTwigAssetsExtension
     {
         return new MarkocupicContaoTwigAssetsExtension();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function build(ContainerBuilder $container): void
-    {
-        parent::build($container);
     }
 }

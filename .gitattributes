@@ -1,4 +1,4 @@
-/.ecs
+/.ecs export-ignore
 /.github export-ignore
 /tests export-ignore
 /.gitattributes export-ignore

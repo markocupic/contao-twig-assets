@@ -9,5 +9,9 @@ services:
 
     Markocupic\ContaoTwigAssets\:
         resource: ../src/
-        exclude: ../src/{DependencyInjection,Model}
+        exclude:
+            - ../src/ContaoManager/
+            - ../src/DependencyInjection/
+            - ../src/MarkocupicContaoTwigAssets.php
+            - ../src/Twig/DocumentLocation/
 

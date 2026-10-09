@@ -6,6 +6,9 @@ Adding assets via the global array `$GLOBALS` is no more possible when using TWI
 This Bundle for the Contao CMS provides **5 TWIG functions** to load assets from inside your **TWIG template**.
 
 
+## Requirements
+- Contao 5.3 or later, including Contao 6
+
 ## Usage
 
 Each of these five functions take two parameters e.g. addJavascriptResource($resource_path, $position)
