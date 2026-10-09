@@ -20,9 +20,8 @@ use Twig\TwigFunction;
 
 class TwigAssetManager extends AbstractExtension
 {
-    public function __construct(
-        private readonly string $projectDir,
-    ) {
+    public function __construct(private readonly string $projectDir)
+    {
         $this->createGlobalsIfNotSet();
     }
 
@@ -58,7 +57,7 @@ class TwigAssetManager extends AbstractExtension
             return filemtime($res);
         }
 
-        throw new \Exception(sprintf('File "%s" not found.', $res));
+        throw new \Exception(\sprintf('File "%s" not found.', $res));
     }
 
     /**
@@ -129,7 +128,7 @@ class TwigAssetManager extends AbstractExtension
     public function addResource(string $location, string $res, int|string|null $pos = null, bool $addFileMakeTime = false): void
     {
         if (!\in_array($location, $this->getGlobalsKeys(), true)) {
-            throw new \Exception("'%s' is not a valid asset location.");
+            throw new \InvalidArgumentException(\sprintf('"%s" is not a valid asset location.', $location));
         }
 
         if ($addFileMakeTime) {
@@ -163,12 +162,11 @@ class TwigAssetManager extends AbstractExtension
         ];
     }
 
-    private function appendFileMakeTime($res)
+    private function appendFileMakeTime(string $res): string
     {
         $intFileMakeTime = $this->getFileMakeTime($res);
-        $queryString = http_build_query(['_ver'=>$intFileMakeTime]);
+        $queryString = http_build_query(['_ver' => $intFileMakeTime]);
 
         return append_query_string($res, $queryString);
-
     }
 }
