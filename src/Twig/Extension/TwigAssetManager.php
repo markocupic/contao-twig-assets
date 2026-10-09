@@ -20,9 +20,8 @@ use Twig\TwigFunction;
 
 class TwigAssetManager extends AbstractExtension
 {
-    public function __construct(
-        private readonly string $projectDir,
-    ) {
+    public function __construct(private readonly string $projectDir)
+    {
         $this->createGlobalsIfNotSet();
     }
 
